@@ -68,10 +68,12 @@ class URLComponentsBuilder {
      The 'Any' component of the dictionary can be of types: String, Bool, Int, Double, [String]
      and [String: String]
      
-     - Arrays will be converted to: < key >[]=<array value 1>&< key >[]=<array value 2>
+     - Bool 'true' will be converted to '1' and 'false' to '0'
+     
+     - Array will be converted to: < key >[]=<array value 1>&< key >[]=<array value 2>
      Example: phone[]=123456654&phone[]=654234123
     
-     - Dictionaries will be converted to: < key >[nestedKey]=< value >&< key >[nestedKey]=< value >
+     - Dictionary will be converted to: < key >[nestedKey]=< value >&< key >[nestedKey]=< value >
      Example: phone[office]=123456654&phone[mobile]=1654234123
      
      IMPORTANT: If an unsupported type is passed, it will assert in this function call.
