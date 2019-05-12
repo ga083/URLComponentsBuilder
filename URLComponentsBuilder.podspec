@@ -1,4 +1,8 @@
 Pod::Spec.new do |s|
+  s.platform = :ios
+  s.ios.deployment_target = '10.0'
+  s.swift_version = "4.2"
+
   s.name         = "URLComponentsBuilder"
   s.version      = "1.0.0"
   s.summary      = "A builder pattern for URLComponents to simplify setting query parameters."
@@ -12,7 +16,7 @@ Translates a 'Dictionary' to 'URLQueryItem(s)'. Simplifies setting query paramet
 
   s.author             = { "Alexander Solis" => "alexandersv@gmail.com" }
 
-  s.source       = { :git => "http://github.com/ga083/URLComponentsBuilder.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/ga083/URLComponentsBuilder.git", :tag => "#{s.version}" }
 
   s.source_files  = "URLComponentsBuilder", "URLComponentsBuilder/**/*.{h,m}"
 
