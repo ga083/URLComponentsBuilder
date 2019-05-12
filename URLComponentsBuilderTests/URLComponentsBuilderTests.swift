@@ -124,4 +124,23 @@ class URLComponentsBuilderTests: XCTestCase {
         
         XCTAssertEqual(urlComponents.percentEncodedQuery, "power=1&password=%25%2634&username=dasd%C3%B6m")
     }
+    
+    func test_README_UsageExample() {
+        let query: [String: Any] = [
+            "name": "Tony",
+            "username": "Stärk",
+            "password": "%&34",
+            "isSuperhero": true,
+            "weightKg": 75.8,
+            "phones": ["mobile": "123456789", "office": "123987456"]]
+        
+        let urlComponents = URLComponentsBuilder()
+            .setScheme("http")
+            .setHost("urlbuilder.com")
+            .setPath("/buildSuit/")
+            .addQuery(items: query)
+            .build()
+        
+        XCTAssertEqual(urlComponents.description, "http://urlbuilder.com/buildSuit/?isSuperhero=1&name=Tony&password=%25%2634&phones%5Bmobile%5D=123456789&phones%5Boffice%5D=123987456&username=St%C3%A4rk&weightKg=75.8")
+    }
 }
