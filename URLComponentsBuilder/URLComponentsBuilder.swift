@@ -17,50 +17,52 @@ import Foundation
  
  - Dictionaries will be converted to: < key >[nestedKey]=< value >&< key >[nestedKey]=< value >
  Example: phone[office]=123456654&phone[mobile]=1654234123
-
+ 
  */
-class URLComponentsBuilder {
+open class URLComponentsBuilder {
     
     private var urlComponents = URLComponents()
-
+    
+    public init() {}
+    
     /**
      Completes de builder pattern by returning the URLComponents object.
      - returns: URLComponent: constructed with the specified builder attributes.
      */
-    func build() -> URLComponents {
+    open func build() -> URLComponents {
         return urlComponents
     }
-
+    
     /**
      Sets the scheme attribute of URLComponents.
      - parameter scheme: that will be set for URLComponents (e.g. https).
      - returns: URLComponentsBuilder
      */
-    func setScheme(_ scheme: String) -> URLComponentsBuilder {
+    open func setScheme(_ scheme: String) -> URLComponentsBuilder {
         urlComponents.scheme = scheme
         return self
     }
-
+    
     /**
      Sets the host attribute of URLComponents.
      - parameter host: that will be set for URLComponents.
      - returns: URLComponentsBuilder
      */
-    func setHost(_ host: String) -> URLComponentsBuilder {
+    open func setHost(_ host: String) -> URLComponentsBuilder {
         urlComponents.host = host
         return self
     }
-
+    
     /**
      Sets the path attribute of URLComponents.
      - parameter path: that will be set for URLComponents.
      - returns: URLComponentsBuilder
      */
-    func setPath(_ path: String) -> URLComponentsBuilder {
+    open func setPath(_ path: String) -> URLComponentsBuilder {
         urlComponents.path = path
         return self
     }
-
+    
     /**
      Adds parameters to the query. If there are parameters that were set previously, the new
      parameters will be appended to the existing ones.
@@ -72,7 +74,7 @@ class URLComponentsBuilder {
      
      - Array will be converted to: < key >[]=<array value 1>&< key >[]=<array value 2>
      Example: phone[]=123456654&phone[]=654234123
-    
+     
      - Dictionary will be converted to: < key >[nestedKey]=< value >&< key >[nestedKey]=< value >
      Example: phone[office]=123456654&phone[mobile]=1654234123
      
@@ -81,11 +83,11 @@ class URLComponentsBuilder {
      - parameter items: a dictionary of [String: Any] to be set as the query.
      - returns: URLComponentsBuilder
      */
-    func addQuery(items: [String: Any]) -> URLComponentsBuilder {
+    open func addQuery(items: [String: Any]) -> URLComponentsBuilder {
         urlComponents.addQuery(items)
         return self
     }
-
+    
 }
 
 extension URLComponents {
