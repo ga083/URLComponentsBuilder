@@ -26,7 +26,11 @@ let query: [String: Any] = [
     "password": "%&34",
     "isSuperhero": true,
     "weightKg": 75.8,
-    "phones": ["mobile": "123456789", "office": "123987456"]]
+    "phones": ["mobile": "123456789",
+               "office": "123987456"],
+    "cars": ["1932 Ford Flathead Roadster",
+             "1967 Shelby Cobra",
+             "Saleen S7"]]
 
 var urlComponents = URLComponentsBuilder()
         .setScheme("http")
