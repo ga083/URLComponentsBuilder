@@ -1,10 +1,12 @@
 # URLComponentsBuilder
-### A builder pattern for URLComponents to simplify setting query parameters
-Translates a 'Dictionary' to 'URLQueryItem(s)'. Simplifies setting query parameters, specifically avoiding the cumbersome task of representing arrays and dictionaries in an URL query.
+### A static library that offers a builder pattern for URLComponents to simplify setting query parameters
+Translates a 'Dictionary' to 'URLQueryItem(s)'. Simplifies setting query parameters, avoiding the cumbersome task of representing arrays and dictionaries in an URL query.
 
 ## Install
 
 #### Cocoa Pods
+Requires Cocoapods 1.5.0 or above.
+
 ```ruby
 target '<you project target>' do
     pod 'URLComponentsBuilder'
