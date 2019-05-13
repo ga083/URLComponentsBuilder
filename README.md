@@ -22,7 +22,7 @@ URLComponentsBuilder.swift
 ```swift
 let query: [String: Any] = [
     "name": "Tony",
-    "username": "Stärk",
+    "username": "Stark",
     "password": "%&34",
     "isSuperhero": true,
     "weightKg": 75.8,
@@ -30,7 +30,7 @@ let query: [String: Any] = [
 
 var urlComponents = URLComponentsBuilder()
         .setScheme("http")
-        .setHost("urlbuilder.com")
+        .setHost("superherobuilder.com")
         .setPath("/buildSuit/")
         .addQuery(items: query)
         .build()
@@ -38,7 +38,7 @@ var urlComponents = URLComponentsBuilder()
 print(urlComponents.url!.absoluteString)
 ```
 Output:
-http://urlbuilder.com/buildSuit/?isSuperhero=1&name=Tony&password=%&34&phones[mobile]=123456789&phones[office]=123987456&username=Stärk&weightKg=75.
+http://superherobuilder.com/buildSuit/?cars[]=1932 Ford Flathead Roadster&cars[]=1967 Shelby Cobra&cars[]=Saleen S7&isSuperhero=1&name=Tony&password=%&34&phones[mobile]=123456789&phones[office]=123987456&username=Stark&weightKg=75.8
 
 ## License
 
