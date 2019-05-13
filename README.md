@@ -37,8 +37,8 @@ var urlComponents = URLComponentsBuilder()
 
 print(urlComponents.url!.absoluteString)
 ```
-#### Output:
-http://urlbuilder.com/buildSuit/?isSuperhero=1&name=Tony&password=%25%2634&phones%5Bmobile%5D=123456789&phones%5Boffice%5D=123987456&username=St%C3%A4rk&weightKg=75.
+Output:
+http://urlbuilder.com/buildSuit/?isSuperhero=1&name=Tony&password=%&34&phones[mobile]=123456789&phones[office]=123987456&username=Stärk&weightKg=75.
 
 ## License
 
