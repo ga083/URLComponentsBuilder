@@ -16,8 +16,8 @@ class URLComponentsBuilderTests: XCTestCase {
     override func setUp() {
         sut = URLComponentsBuilder()
         .setScheme("http")
-        .setHost("urlbuilder.com")
-        .setPath("/api/")
+        .setHost("superherobuilder.com")
+        .setPath("/buildSuit/")
     }
 
     override func tearDown() {
@@ -30,12 +30,12 @@ class URLComponentsBuilderTests: XCTestCase {
 
     func test_Host_HasExpectedValueWhenSet() {
         let urlComponents = sut.build()
-        XCTAssertEqual(urlComponents.host, "urlbuilder.com")
+        XCTAssertEqual(urlComponents.host, "superherobuilder.com")
     }
     
     func test_Path_HasExpectedValueWhenSet() {
         let urlComponents = sut.build()
-        XCTAssertEqual(urlComponents.path, "/api/")
+        XCTAssertEqual(urlComponents.path, "/buildSuit/")
     }
 
     func test_Query_WithStringParameters() {
@@ -128,19 +128,23 @@ class URLComponentsBuilderTests: XCTestCase {
     func test_README_UsageExample() {
         let query: [String: Any] = [
             "name": "Tony",
-            "username": "Stärk",
+            "username": "Stark",
             "password": "%&34",
             "isSuperhero": true,
             "weightKg": 75.8,
-            "phones": ["mobile": "123456789", "office": "123987456"]]
+            "phones": ["mobile": "123456789",
+                       "office": "123987456"],
+            "cars": ["1932 Ford Flathead Roadster",
+                     "1967 Shelby Cobra",
+                     "Saleen S7"]]
         
         let urlComponents = URLComponentsBuilder()
             .setScheme("http")
-            .setHost("urlbuilder.com")
+            .setHost("superherobuilder.com")
             .setPath("/buildSuit/")
             .addQuery(items: query)
             .build()
         
-        XCTAssertEqual(urlComponents.description, "http://urlbuilder.com/buildSuit/?isSuperhero=1&name=Tony&password=%25%2634&phones%5Bmobile%5D=123456789&phones%5Boffice%5D=123987456&username=St%C3%A4rk&weightKg=75.8")
+        XCTAssertEqual(urlComponents.description, "http://superherobuilder.com/buildSuit/?cars%5B%5D=1932%20Ford%20Flathead%20Roadster&cars%5B%5D=1967%20Shelby%20Cobra&cars%5B%5D=Saleen%20S7&isSuperhero=1&name=Tony&password=%25%2634&phones%5Bmobile%5D=123456789&phones%5Boffice%5D=123987456&username=Stark&weightKg=75.8")
     }
 }
