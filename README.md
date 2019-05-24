@@ -30,7 +30,8 @@ let query: [String: Any] = [
                "office": "123987456"],
     "belongings": ["cars": ["1932 Ford Flathead Roadster",
                             "1967 Shelby Cobra",
-                            "Saleen S7"], "motorcycles": ["zero eng type6"]]]
+                            "Saleen S7"], 
+                   "motorcycles": ["zero eng type6"]]]
 
 var urlComponents = URLComponentsBuilder()
         .setScheme("http")
