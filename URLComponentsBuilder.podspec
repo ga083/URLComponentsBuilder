@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '10.0'
   s.swift_version = "4.2"
   s.name = "URLComponentsBuilder"
-  s.version = "1.0.0"
+  s.version = "1.1.0"
   s.summary = "A builder pattern for URLComponents to simplify setting query parameters."
   s.description = <<-DESC
 Translates a 'Dictionary' to 'URLQueryItem(s)'. Simplifies setting query parameters, specifically avoiding the cumbersome task of representing arrays and dictionaries in an URL query.

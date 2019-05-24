@@ -9,15 +9,8 @@
 import Foundation
 
 /**
- Builder pattern for URLComponents. Main features is conversion of Dictionaries
+ Builder pattern for URLComponents. Main featu  res is conversion of Dictionaries
  into URLQueryItems using the 'addQuery(items:)' function.
- 
- - Arrays will be converted to: < key >[]=<array value 1>&< key >[]=<array value 2>
- Example: phone[]=123456654&phone[]=654234123
- 
- - Dictionaries will be converted to: < key >[nestedKey]=< value >&< key >[nestedKey]=< value >
- Example: phone[office]=123456654&phone[mobile]=1654234123
- 
  */
 open class URLComponentsBuilder {
     
@@ -72,11 +65,15 @@ open class URLComponentsBuilder {
      
      - Bool 'true' will be converted to '1' and 'false' to '0'
      
-     - Array will be converted to: < key >[]=<array value 1>&< key >[]=<array value 2>
-     Example: phone[]=123456654&phone[]=654234123
+     - [] will be converted to: < key >[< index >]=<array value 1>&< key >[< index >]=<array value 2>
+     Example: phone[0]=123456654&phone[1]=654234123
      
-     - Dictionary will be converted to: < key >[nestedKey]=< value >&< key >[nestedKey]=< value >
+     - [:] will be converted to: < key >[nestedKey]=< value >&< key >[nestedKey]=< value >
      Example: phone[office]=123456654&phone[mobile]=1654234123
+     
+     - [:[]] will be converted to:
+     < key >[nestedKey][< index >]=< value >&< key >[nestedKey][< index >]=< value >
+     Example: phone[office][0]=123456654&phone[office][1]=1654234123
      
      IMPORTANT: If an unsupported type is passed, it will assert in this function call.
      
@@ -126,8 +123,10 @@ extension URLComponents {
         }
         
         if let element = value as? [String] {
+            var iteration = 0
             for nestedValue in element {
-                queryItems += queryItemsFrom(key: "\(key)[]", value: nestedValue)
+                queryItems += queryItemsFrom(key: "\(key)[\(iteration)]", value: nestedValue)
+                iteration += 1
             }
         }
         
@@ -137,7 +136,14 @@ extension URLComponents {
                 queryItems += queryItemsFrom(key: "\(key)[\(nestedKey)]", value: nestedValue)
             }
         }
-        
+
+        if let element = value as? [String: [String]] {
+            // Sort the collection to ensure consistent ordering in query string.
+            for (nestedKey, nestedValue) in element.sorted(by: { $0.key < $1.key }) {
+                queryItems += queryItemsFrom(key: "\(key)[\(nestedKey)]", value: nestedValue)
+            }
+        }
+
         assert(!queryItems.isEmpty, "An unsupported type was found in 'value'")
         
         // TODO: Set and Data are pending and should get the same treatment.

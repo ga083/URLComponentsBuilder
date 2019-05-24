@@ -10,24 +10,24 @@ import XCTest
 @testable import URLComponentsBuilder
 
 class URLComponentsBuilderTests: XCTestCase {
-
+    
     var sut: URLComponentsBuilder!
     
     override func setUp() {
         sut = URLComponentsBuilder()
-        .setScheme("http")
-        .setHost("superherobuilder.com")
-        .setPath("/buildSuit/")
+            .setScheme("http")
+            .setHost("superherobuilder.com")
+            .setPath("/buildSuit/")
     }
-
+    
     override func tearDown() {
     }
-
+    
     func test_Scheme_HasExpectedValueWhenSet() {
         let urlComponents = sut.build()
         XCTAssertEqual(urlComponents.scheme, "http")
     }
-
+    
     func test_Host_HasExpectedValueWhenSet() {
         let urlComponents = sut.build()
         XCTAssertEqual(urlComponents.host, "superherobuilder.com")
@@ -37,7 +37,7 @@ class URLComponentsBuilderTests: XCTestCase {
         let urlComponents = sut.build()
         XCTAssertEqual(urlComponents.path, "/buildSuit/")
     }
-
+    
     func test_Query_WithStringParameters() {
         let query: [String: Any] = [
             "name": "Tony",
@@ -60,7 +60,7 @@ class URLComponentsBuilderTests: XCTestCase {
             .build()
         
         XCTAssertEqual(urlComponents.percentEncodedQuery, "hasCar=0&hasMotorcycle=1")
-
+        
     }
     
     func test_Query_WithNumberParameters() {
@@ -84,7 +84,7 @@ class URLComponentsBuilderTests: XCTestCase {
             .build()
         
         XCTAssertEqual(urlComponents.percentEncodedQuery,
-                       "phoneNumbers%5B%5D=12345678&phoneNumbers%5B%5D=87654321&phoneNumbers%5B%5D=12348765")
+                       "phoneNumbers%5B0%5D=12345678&phoneNumbers%5B1%5D=87654321&phoneNumbers%5B2%5D=12348765")
     }
     
     func test_Query_WithDictionaryParameters() {
@@ -98,7 +98,19 @@ class URLComponentsBuilderTests: XCTestCase {
         
         XCTAssertEqual(urlComponents.percentEncodedQuery, "users%5Blastname%5D=Doe&users%5Bname%5D=John")
     }
-
+    
+    func test_Query_WithDictionaryOfArrayParameters() {
+        let query: [String: Any] = ["belongings": ["motorcycles": ["BMW 1200GS",
+                                                                   "Triumph Bonneville"]]]
+        
+        let urlComponents = sut
+            .addQuery(items: query)
+            .build()
+        
+        XCTAssertEqual(urlComponents.percentEncodedQuery,
+                       "belongings%5Bmotorcycles%5D%5B0%5D=BMW%201200GS&belongings%5Bmotorcycles%5D%5B1%5D=Triumph%20Bonneville")
+    }
+    
     func test_Query_PercentEncoding() {
         let query: [String: Any] = [
             "username": "dasdöm",
@@ -110,12 +122,12 @@ class URLComponentsBuilderTests: XCTestCase {
         
         XCTAssertEqual(urlComponents.percentEncodedQuery, "password=%25%2634&username=dasd%C3%B6m")
     }
-   
+    
     func test_Query_AppendMoreParameters() {
         let query: [String: Any] = [
             "username": "dasdöm",
             "password": "%&34"]
-
+        
         _ = sut.addQuery(items: ["power": true])
         
         let urlComponents = sut
@@ -134,9 +146,9 @@ class URLComponentsBuilderTests: XCTestCase {
             "weightKg": 75.8,
             "phones": ["mobile": "123456789",
                        "office": "123987456"],
-            "cars": ["1932 Ford Flathead Roadster",
-                     "1967 Shelby Cobra",
-                     "Saleen S7"]]
+            "belongings": ["cars": ["1932 Ford Flathead Roadster",
+                                    "1967 Shelby Cobra",
+                                    "Saleen S7"], "motorcycles": ["zero eng type6"]]]
         
         let urlComponents = URLComponentsBuilder()
             .setScheme("http")
@@ -145,6 +157,6 @@ class URLComponentsBuilderTests: XCTestCase {
             .addQuery(items: query)
             .build()
         
-        XCTAssertEqual(urlComponents.description, "http://superherobuilder.com/buildSuit/?cars%5B%5D=1932%20Ford%20Flathead%20Roadster&cars%5B%5D=1967%20Shelby%20Cobra&cars%5B%5D=Saleen%20S7&isSuperhero=1&name=Tony&password=%25%2634&phones%5Bmobile%5D=123456789&phones%5Boffice%5D=123987456&username=Stark&weightKg=75.8")
+        XCTAssertEqual(urlComponents.description, "http://superherobuilder.com/buildSuit/?belongings%5Bcars%5D%5B0%5D=1932%20Ford%20Flathead%20Roadster&belongings%5Bcars%5D%5B1%5D=1967%20Shelby%20Cobra&belongings%5Bcars%5D%5B2%5D=Saleen%20S7&belongings%5Bmotorcycles%5D%5B0%5D=zero%20eng%20type6&isSuperhero=1&name=Tony&password=%25%2634&phones%5Bmobile%5D=123456789&phones%5Boffice%5D=123987456&username=Stark&weightKg=75.8")
     }
 }

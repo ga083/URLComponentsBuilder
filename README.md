@@ -28,9 +28,9 @@ let query: [String: Any] = [
     "weightKg": 75.8,
     "phones": ["mobile": "123456789",
                "office": "123987456"],
-    "cars": ["1932 Ford Flathead Roadster",
-             "1967 Shelby Cobra",
-             "Saleen S7"]]
+    "belongings": ["cars": ["1932 Ford Flathead Roadster",
+                            "1967 Shelby Cobra",
+                            "Saleen S7"], "motorcycles": ["zero eng type6"]]]
 
 var urlComponents = URLComponentsBuilder()
         .setScheme("http")
@@ -42,7 +42,7 @@ var urlComponents = URLComponentsBuilder()
 print(urlComponents.url!.absoluteString)
 ```
 Output:
-http://superherobuilder.com/buildSuit/?cars[]=1932 Ford Flathead Roadster&cars[]=1967 Shelby Cobra&cars[]=Saleen S7&isSuperhero=1&name=Tony&password=%&34&phones[mobile]=123456789&phones[office]=123987456&username=Stark&weightKg=75.8
+http://superherobuilder.com/buildSuit/?belongings[cars][0]=1932 Ford Flathead Roadster&belongings[cars][1]=1967 Shelby Cobra&belongings[cars][2]=Saleen S7&belongings[motorcycles][0]=zero eng type6&isSuperhero=1&name=Tony&password=%&34&phones[mobile]=123456789&phones[office]=123987456&username=Stark&weightKg=75.8
 
 ## License
 
