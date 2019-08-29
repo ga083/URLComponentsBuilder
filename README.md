@@ -28,6 +28,8 @@ let query: [String: Any] = [
     "weightKg": 75.8,
     "phones": ["mobile": "123456789",
                "office": "123987456"],
+    "homes": [["name": "Point Dume", "address": "10880 Malibu Point"],
+               ["name": "Stark Tower", "address": "200 Park Avenue"]],
     "belongings": ["cars": ["1932 Ford Flathead Roadster",
                             "1967 Shelby Cobra",
                             "Saleen S7"], 
@@ -43,7 +45,7 @@ var urlComponents = URLComponentsBuilder()
 print(urlComponents.url!.absoluteString)
 ```
 Output:
-http://superherobuilder.com/buildSuit/?belongings[cars][0]=1932 Ford Flathead Roadster&belongings[cars][1]=1967 Shelby Cobra&belongings[cars][2]=Saleen S7&belongings[motorcycles][0]=zero eng type6&isSuperhero=1&name=Tony&password=%&34&phones[mobile]=123456789&phones[office]=123987456&username=Stark&weightKg=75.8
+http://superherobuilder.com/buildSuit/?belongings[cars][0]=1932 Ford Flathead Roadster&belongings[cars][1]=1967 Shelby Cobra&belongings[cars][2]=Saleen S7&belongings[motorcycles][0]=zero eng type6&homes[0][address]=10880 Malibu Point&homes[0][name]=Point Dume&homes[1][address]=200 Park Avenue&homes[1][name]=Stark Tower&isSuperhero=1&name=Tony&password=%&34&phones[mobile]=123456789&phones[office]=123987456&username=Stark&weightKg=75.8
 
 ## License
 

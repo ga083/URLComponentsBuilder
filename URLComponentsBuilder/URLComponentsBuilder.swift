@@ -75,6 +75,10 @@ open class URLComponentsBuilder {
      < key >[nestedKey][< index >]=< value >&< key >[nestedKey][< index >]=< value >
      Example: phone[office][0]=123456654&phone[office][1]=1654234123
      
+     - [[:]] will be converted to:
+     < key >[< index >][nestedKey]=< value >&< key >[< index >][nestedKey]=< value >
+     Example: homes[0][name]=Point Dume&homes[1][address]=200 Park Avenue
+     
      IMPORTANT: If an unsupported type is passed, it will assert in this function call.
      
      - parameter items: a dictionary of [String: Any] to be set as the query.
@@ -144,6 +148,14 @@ extension URLComponents {
             }
         }
 
+        if let element = value as? [[String: String]] {
+            var iteration = 0
+            for nestedValue in element {
+                queryItems += queryItemsFrom(key: "\(key)[\(iteration)]", value: nestedValue)
+                iteration += 1
+            }
+        }
+        
         assert(!queryItems.isEmpty, "An unsupported type was found in 'value'")
         
         // TODO: Set and Data are pending and should get the same treatment.
